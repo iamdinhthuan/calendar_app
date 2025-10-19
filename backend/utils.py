@@ -199,14 +199,14 @@ def create_session_cookie(response: Response, user_id: int):
     """
     token = create_session_jwt(user_id)
     
-    # For development: cookies work same-origin via Next.js proxy
-    # SameSite=lax is secure and works for top-level navigation
+    # For production with HTTPS: use SameSite=none with Secure=True
+    # This allows cookies to be sent cross-origin (frontend -> backend)
     response.set_cookie(
         key="session",
         value=token,
         httponly=True,
-        samesite="lax",
-        secure=False,  # Set to True in production with HTTPS
+        samesite="none",  # Allow cross-origin cookies
+        secure=True,  # Required with SameSite=none (HTTPS only)
         max_age=7 * 24 * 60 * 60,  # 7 days
         path="/",
         # Don't set domain - let browser use current origin
