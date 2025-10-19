@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   async rewrites() {
-    // Use production backend URL or fallback to localhost for development
+    // Use production backend or fallback to localhost for local dev
     const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
     
     return [
@@ -17,10 +17,6 @@ const nextConfig = {
       {
         source: '/debug/:path*',
         destination: `${backendUrl}/debug/:path*`,
-      },
-      {
-        source: '/admin/:path*',
-        destination: `${backendUrl}/admin/:path*`,
       },
     ];
   },
