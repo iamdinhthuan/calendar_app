@@ -2,9 +2,8 @@
  * API client for backend communication
  */
 
-// Use empty string for same-origin requests (via Next.js proxy)
-// In production, set NEXT_PUBLIC_BACKEND_URL to actual backend URL if different
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "";
+// Always use actual backend URL (no proxy)
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
 
 export class ApiError extends Error {
   constructor(
