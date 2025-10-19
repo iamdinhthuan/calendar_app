@@ -3,7 +3,10 @@ const nextConfig = {
   reactStrictMode: true,
   async rewrites() {
     // Use production backend or fallback to localhost for local dev
-    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
+    let backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
+    
+    // Remove trailing slash to prevent double slashes
+    backendUrl = backendUrl.replace(/\/$/, '');
     
     return [
       {
