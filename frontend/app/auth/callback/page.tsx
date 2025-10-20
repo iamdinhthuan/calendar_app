@@ -28,7 +28,8 @@ function AuthCallbackContent() {
 
       try {
         // Send code to backend to exchange for session
-        const response = await fetch(`/auth/exchange?code=${encodeURIComponent(code)}&state=${encodeURIComponent(state)}`, {
+        const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+        const response = await fetch(`${backendUrl}/auth/exchange?code=${encodeURIComponent(code)}&state=${encodeURIComponent(state)}`, {
           method: "POST",
           credentials: "include", // Important for cookie
         });
